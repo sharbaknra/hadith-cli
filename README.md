@@ -1,233 +1,127 @@
-# hadith-cli 🤲
+# hadith-cli
 
-> CLI tool for Islamic duas (supplications) with daily reminders and context-based recommendations
+A terminal CLI for browsing Islamic duas with optional hadith-at-startup support.
 
-A beautiful command-line interface for accessing Islamic duas, inspired by [ramadan-cli](https://github.com/ahmadawais/ramadan-cli).
+It includes:
+- daily and random duas
+- keyword search and category browsing
+- favorites and local config management
+- startup hadith output with a locally cached hadith dataset
 
-## Features
+## Requirements
 
-- 📖 **Daily Dua** - Get a different dua each day
-- 🔍 **Search** - Search duas by keyword, Arabic text, or translation
-- 📁 **Categories** - Browse duas by category (food, sleep, travel, etc.)
-- ⭐ **Favorites** - Save your favorite duas
-- 🎲 **Random** - Get a random dua for inspiration
-- 🎨 **Beautiful Output** - Colorful, formatted terminal output
-- ⚙️ **Configurable** - Customize language preferences and reminders
-- 📊 **JSON Support** - Machine-readable output for automation
+- Node.js `>=18`
+- npm or pnpm
 
-## Install
+## Installation
 
 ```bash
-# Using npx (no installation needed)
-npx hadith-cli
+# install dependencies
+npm install
 
-# Or install globally
-npm install -g hadith-cli
+# build
+npm run build
 ```
 
-## Usage
-
-### Daily Dua
+To run as a global command:
 
 ```bash
-# Show today's dua
+npm link
+dua --help
+```
+
+You can also run directly without linking:
+
+```bash
+node dist/cli.js --help
+```
+
+## Quick Usage
+
+```bash
+# default action (same as "daily")
 dua
+
+# today's dua
 dua daily
 
-# Plain text output
-dua daily --plain
+# random dua
+dua random
 
-# JSON output
-dua daily --json
-```
+# search
+dua search "patience"
 
-### Search
-
-```bash
-# Search for duas
-dua search "eating"
-dua search "travel"
-dua search "اللَّهُمَّ"
-
-# JSON output
-dua search "sleep" --json
-```
-
-### Show Specific Dua
-
-```bash
-# Show a dua by ID
+# show one dua by id
 dua show morning-1
-dua show eating-before
-```
 
-### Categories
-
-```bash
-# List all categories
+# list categories
 dua category --list
 
-# Show duas in a category
-dua category food
-dua category sleep
-dua category travel
-```
+# list duas in a category
+dua category --category morning
 
-### Random Dua
-
-```bash
-# Get a random dua
-dua random
-```
-
-### Favorites
-
-```bash
-# List favorite duas
+# favorites
+dua favorites --add morning-1
 dua favorites --list
-dua favorites
-
-# Add to favorites
-dua favorites --add morning-1
-
-# Remove from favorites
 dua favorites --remove morning-1
-```
 
-### Configuration
-
-```bash
-# Show current config
+# config
 dua config --show
-
-# Set preferred language
-dua config --preferred-language arabic
 dua config --preferred-language translation
-dua config --preferred-language all
-
-# Enable daily reminder
-dua config --daily-reminder true
-
-# Set reminder time
-dua config --reminder-time "08:00"
-
-# Clear configuration
-dua config --clear
 ```
 
-## Examples
+## Commands
 
-```bash
-# Get today's dua
-dua
+- `daily` - show today's dua
+- `search <query>` - search by keyword
+- `show <id>` - show a specific dua
+- `category --list` - list all categories
+- `category --category <category>` - list duas in a category
+- `random` - show a random dua
+- `favorites --add <id>` - add a favorite
+- `favorites --remove <id>` - remove a favorite
+- `favorites --list` - list favorites
+- `config --show` - show current config
+- `config --clear` - clear saved config
+- `config --daily-reminder <boolean>` - enable/disable reminder
+- `config --reminder-time <HH:MM>` - set reminder time
+- `config --preferred-language <arabic|transliteration|translation|all>` - output language
+- `startup` - print a random hadith for shell startup usage
+- `scrape-hadith` - refresh local hadith cache from remote source
 
-# Search for duas about food
-dua search food
+Most dua commands also support:
+- `-j, --json` for JSON output
+- `-p, --plain` for compact plain output
 
-# Browse sleep-related duas
-dua category sleep
+## Hadith Cache
 
-# Get a random dua
-dua random
+The `startup` command reads hadiths from a local cache.  
+If cache is missing/stale, it attempts to sync automatically.  
+If sync fails (for example offline), it falls back to built-in seed hadiths.
 
-# Add current dua to favorites
-dua favorites --add morning-1
+## Environment Variables
 
-# View favorites
-dua favorites
-```
+- `HADITH_CLI_CONFIG_DIR` - custom directory for config + hadith cache
+- `DUA_CLI_CONFIG_DIR` - legacy/alternate config directory env var
 
-## Output Formats
-
-### Default (Formatted)
-
-```
-🤲 Dua CLI - Islamic Supplications
-
-Morning Remembrance [daily] (morning)
-
-اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ
-
-Allahumma bika asbahna, wa bika amsayna, wa bika nahya, wa bika namutu, wa ilaykan-nushur
-
-O Allah, by You we enter the morning, and by You we enter the evening, and by You we live, and by You we die, and to You is the resurrection.
-
-Reference: Tirmidhi
-```
-
-### JSON Output
-
-```bash
-dua daily --json
-```
-
-```json
-{
-  "dua": {
-    "id": "morning-1",
-    "title": "Morning Remembrance",
-    "arabic": "اللَّهُمَّ بِكَ أَصْبَحْنَا...",
-    "transliteration": "Allahumma bika asbahna...",
-    "translation": "O Allah, by You we enter...",
-    "category": "daily",
-    "context": "morning",
-    "reference": "Tirmidhi"
-  },
-  "date": "2026-02-20"
-}
-```
-
-## Categories
-
-- **daily** - Daily Remembrances
-- **food** - Food & Drink
-- **sleep** - Sleep
-- **travel** - Travel
-- **home** - Home
-- **worship** - Worship
-- **hygiene** - Hygiene
-- **supplication** - General Supplications
-
-## Configuration
-
-Configuration is stored in your OS config directory and can be customized:
-
-- `favoriteDuas` - Array of favorite dua IDs
-- `dailyReminder` - Enable/disable daily reminders
-- `reminderTime` - Time for daily reminder (HH:MM format)
-- `preferredLanguage` - Language preference (arabic|transliteration|translation|all)
-
-Set `HADITH_CLI_CONFIG_DIR` environment variable to customize config location.
+`HADITH_CLI_CONFIG_DIR` takes precedence when both are set.
 
 ## Development
 
 ```bash
-# Install dependencies
-pnpm install
+# watch build
+npm run dev
 
-# Build
-pnpm build
+# tests
+npm run test
 
-# Run in development
-pnpm dev
+# lint
+npm run lint
 
-# Type check
-pnpm typecheck
-
-# Lint
-pnpm lint
-
-# Format
-pnpm format
-
-# Test
-pnpm test
+# type-check
+npm run typecheck
 ```
 
 ## License
 
 MIT
-
-## Credits
-
-Inspired by [ramadan-cli](https://github.com/ahmadawais/ramadan-cli) by Ahmad Awais.
