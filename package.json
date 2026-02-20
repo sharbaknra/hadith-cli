@@ -1,5 +1,5 @@
 {
-  "name": "hadith-cli",
+  "name": "@sharbaknra/hadith-cli",
   "version": "0.1.0",
   "description": "CLI tool for Islamic hadith entries with daily reminders and context-based recommendations",
   "type": "module",

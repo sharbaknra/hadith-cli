@@ -77,6 +77,13 @@ program
   });
 
 program
+  .command('hadith-now')
+  .description('Show one random hadith on demand')
+  .action(async () => {
+    await startupCommand();
+  });
+
+program
   .command('scrape-hadith')
   .description('Scrape and cache hadith collections locally')
   .action(async () => {

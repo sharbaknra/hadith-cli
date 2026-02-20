@@ -11,10 +11,10 @@ Command-line tool that shows a hadith in your terminal and supports local hadith
 
 ```bash
 # one-off run
-npx hadith-cli startup
+npx @sharbaknra/hadith-cli startup
 
 # global install
-npm install -g hadith-cli
+npm install -g @sharbaknra/hadith-cli
 ```
 
 Installed binaries:
@@ -52,6 +52,9 @@ hadith-cli favorites --remove morning-1
 
 # show startup hadith now
 hadith-cli startup
+
+# show one random hadith on demand (without startup hooks)
+hadith-cli hadith-now
 
 # scrape full english hadith cache
 hadith-cli scrape-hadith
@@ -112,7 +115,7 @@ Restart PowerShell.
 
 ## Cache and Config
 
-- `startup` reads from local hadith cache.
+- `startup` and `hadith-now` read from local hadith cache.
 - If cache is missing/stale, it tries to sync from remote source.
 - If sync fails (offline/network issue), it falls back to seed hadiths.
 
@@ -134,7 +137,7 @@ npm run check
 
 ```bash
 npm login
-npm publish
+npm publish --access public
 ```
 
 `prepublishOnly` runs `npm run check`, so publish fails if quality checks fail.
