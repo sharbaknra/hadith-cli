@@ -1,4 +1,4 @@
-export interface Dua {
+export interface HadithEntry {
   readonly id: string;
   readonly title: string;
   readonly arabic: string;
@@ -10,38 +10,38 @@ export interface Dua {
   readonly times?: string[];
 }
 
-export interface DuaCategory {
+export interface HadithCategory {
   readonly id: string;
   readonly name: string;
   readonly description?: string;
 }
 
-export interface DuaContext {
+export interface HadithContext {
   readonly id: string;
   readonly name: string;
   readonly description?: string;
 }
 
-export interface DailyDua {
-  readonly dua: Dua;
+export interface DailyHadith {
+  readonly hadith: HadithEntry;
   readonly date: string;
 }
 
-export interface DuaProgress {
-  readonly duaId: string;
+export interface HadithProgress {
+  readonly hadithId: string;
   readonly lastRead?: string;
   readonly readCount: number;
   readonly favorited: boolean;
 }
 
-export interface DuaConfig {
-  readonly favoriteDuas?: string[] | undefined;
+export interface HadithCliConfig {
+  readonly favoriteHadiths?: string[] | undefined;
   readonly dailyReminder?: boolean | undefined;
   readonly reminderTime?: string | undefined;
   readonly preferredLanguage?: 'arabic' | 'transliteration' | 'translation' | 'all' | undefined;
 }
 
-export interface Hadith {
+export interface CollectionHadith {
   readonly id: string;
   readonly collection: string;
   readonly hadithNumber: number;

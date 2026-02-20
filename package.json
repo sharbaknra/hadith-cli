@@ -1,17 +1,14 @@
 {
   "name": "hadith-cli",
   "version": "0.1.0",
-  "description": "CLI tool for Islamic duas (supplications) with daily reminders and context-based recommendations",
+  "description": "CLI tool for Islamic hadith entries with daily reminders and context-based recommendations",
   "type": "module",
   "bin": {
-    "dua": "./dist/cli.js",
     "hadith-cli": "./dist/cli.js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -23,15 +20,7 @@
     "typecheck": "tsc --noEmit",
     "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
   },
-  "keywords": [
-    "dua",
-    "islamic",
-    "supplication",
-    "prayer",
-    "reminder",
-    "cli",
-    "muslim"
-  ],
+  "keywords": ["hadith", "islamic", "supplication", "prayer", "reminder", "cli", "muslim"],
   "author": "",
   "license": "MIT",
   "repository": {

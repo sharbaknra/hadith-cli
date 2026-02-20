@@ -1,10 +1,10 @@
 import pc from 'picocolors';
 import {
-  getConfig,
   clearConfig,
+  getConfig,
   setDailyReminder,
-  setReminderTime,
   setPreferredLanguage,
+  setReminderTime,
 } from '../config.js';
 
 export interface ConfigCommandOptions {
@@ -30,15 +30,13 @@ export const configCommand = (options: ConfigCommandOptions = {}): void => {
       console.log(`  Reminder Time: ${config.reminderTime}`);
     }
     console.log(`  Preferred Language: ${config.preferredLanguage ?? 'all'}`);
-    console.log(`  Favorite Duas: ${(config.favoriteDuas ?? []).length}`);
+    console.log(`  Favorite Hadith Entries: ${(config.favoriteHadiths ?? []).length}`);
     return;
   }
 
   if (options['daily-reminder'] !== undefined) {
     setDailyReminder(options['daily-reminder']);
-    console.log(
-      pc.green(`Daily reminder ${options['daily-reminder'] ? 'enabled' : 'disabled'}.`)
-    );
+    console.log(pc.green(`Daily reminder ${options['daily-reminder'] ? 'enabled' : 'disabled'}.`));
   }
 
   if (options['reminder-time']) {
@@ -48,8 +46,6 @@ export const configCommand = (options: ConfigCommandOptions = {}): void => {
 
   if (options['preferred-language']) {
     setPreferredLanguage(options['preferred-language']);
-    console.log(
-      pc.green(`Preferred language set to ${options['preferred-language']}.`)
-    );
+    console.log(pc.green(`Preferred language set to ${options['preferred-language']}.`));
   }
 };

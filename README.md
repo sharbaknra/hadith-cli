@@ -1,9 +1,9 @@
 # hadith-cli
 
-A terminal CLI for browsing Islamic duas with optional hadith-at-startup support.
+A terminal CLI for browsing Islamic hadith entries with optional startup hadith support.
 
 It includes:
-- daily and random duas
+- daily and random hadith entries
 - keyword search and category browsing
 - favorites and local config management
 - startup hadith output with a locally cached hadith dataset
@@ -27,7 +27,7 @@ To run as a global command:
 
 ```bash
 npm link
-dua --help
+hadith-cli --help
 ```
 
 You can also run directly without linking:
@@ -40,44 +40,44 @@ node dist/cli.js --help
 
 ```bash
 # default action (same as "daily")
-dua
+hadith-cli
 
-# today's dua
-dua daily
+# today's hadith entry
+hadith-cli daily
 
-# random dua
-dua random
+# random hadith entry
+hadith-cli random
 
 # search
-dua search "patience"
+hadith-cli search "patience"
 
-# show one dua by id
-dua show morning-1
+# show one hadith entry by id
+hadith-cli show morning-1
 
 # list categories
-dua category --list
+hadith-cli category --list
 
-# list duas in a category
-dua category --category morning
+# list hadith entries in a category
+hadith-cli category --category morning
 
 # favorites
-dua favorites --add morning-1
-dua favorites --list
-dua favorites --remove morning-1
+hadith-cli favorites --add morning-1
+hadith-cli favorites --list
+hadith-cli favorites --remove morning-1
 
 # config
-dua config --show
-dua config --preferred-language translation
+hadith-cli config --show
+hadith-cli config --preferred-language translation
 ```
 
 ## Commands
 
-- `daily` - show today's dua
+- `daily` - show today's hadith entry
 - `search <query>` - search by keyword
-- `show <id>` - show a specific dua
+- `show <id>` - show a specific hadith entry
 - `category --list` - list all categories
-- `category --category <category>` - list duas in a category
-- `random` - show a random dua
+- `category --category <category>` - list hadith entries in a category
+- `random` - show a random hadith entry
 - `favorites --add <id>` - add a favorite
 - `favorites --remove <id>` - remove a favorite
 - `favorites --list` - list favorites
@@ -89,7 +89,7 @@ dua config --preferred-language translation
 - `startup` - print a random hadith for shell startup usage
 - `scrape-hadith` - refresh local hadith cache from remote source
 
-Most dua commands also support:
+Most content commands also support:
 - `-j, --json` for JSON output
 - `-p, --plain` for compact plain output
 
@@ -102,9 +102,6 @@ If sync fails (for example offline), it falls back to built-in seed hadiths.
 ## Environment Variables
 
 - `HADITH_CLI_CONFIG_DIR` - custom directory for config + hadith cache
-- `DUA_CLI_CONFIG_DIR` - legacy/alternate config directory env var
-
-`HADITH_CLI_CONFIG_DIR` takes precedence when both are set.
 
 ## Development
 

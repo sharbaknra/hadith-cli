@@ -1,7 +1,7 @@
-import { getDuasByCategory, getCategories } from '../dua-service.js';
-import { formatDuaList } from '../ui/formatter.js';
-import { getBanner } from '../ui/banner.js';
 import { getConfig } from '../config.js';
+import { getCategories, getHadithEntriesByCategory } from '../hadith-content-service.js';
+import { getBanner } from '../ui/banner.js';
+import { formatHadithEntryList } from '../ui/formatter.js';
 import type { FormatOptions } from '../ui/formatter.js';
 
 export interface CategoryCommandOptions {
@@ -27,13 +27,13 @@ export const categoryCommand = (options: CategoryCommandOptions = {}): void => {
     }
 
     console.log('Available categories:\n');
-    categories.forEach((cat) => {
-      const duas = getDuasByCategory(cat.id);
-      console.log(`  ${cat.name} (${duas.length} duas)`);
+    for (const cat of categories) {
+      const hadithEntries = getHadithEntriesByCategory(cat.id);
+      console.log(`  ${cat.name} (${hadithEntries.length} entries)`);
       if (cat.description) {
         console.log(`    ${cat.description}`);
       }
-    });
+    }
     return;
   }
 
@@ -42,10 +42,10 @@ export const categoryCommand = (options: CategoryCommandOptions = {}): void => {
     process.exit(1);
   }
 
-  const duas = getDuasByCategory(options.category);
+  const hadithEntries = getHadithEntriesByCategory(options.category);
 
   if (options.json) {
-    console.log(JSON.stringify(duas, null, 2));
+    console.log(JSON.stringify(hadithEntries, null, 2));
     return;
   }
 
@@ -56,18 +56,25 @@ export const categoryCommand = (options: CategoryCommandOptions = {}): void => {
   const formatOptions: FormatOptions = {
     json: options.json ?? undefined,
     compact: options.plain ?? undefined,
-    showArabic: config.preferredLanguage === 'all' || config.preferredLanguage === 'arabic' ? true : undefined,
+    showArabic:
+      config.preferredLanguage === 'all' || config.preferredLanguage === 'arabic'
+        ? true
+        : undefined,
     showTransliteration:
-      config.preferredLanguage === 'all' || config.preferredLanguage === 'transliteration' ? true : undefined,
+      config.preferredLanguage === 'all' || config.preferredLanguage === 'transliteration'
+        ? true
+        : undefined,
     showTranslation:
-      config.preferredLanguage === 'all' || config.preferredLanguage === 'translation' ? true : undefined,
+      config.preferredLanguage === 'all' || config.preferredLanguage === 'translation'
+        ? true
+        : undefined,
   };
 
-  if (duas.length === 0) {
-    console.log(`No duas found in category "${options.category}"`);
+  if (hadithEntries.length === 0) {
+    console.log(`No hadith entries found in category "${options.category}"`);
     return;
   }
 
-  console.log(`Duas in category "${options.category}" (${duas.length}):\n`);
-  console.log(formatDuaList(duas, formatOptions));
+  console.log(`Hadith entries in category "${options.category}" (${hadithEntries.length}):\n`);
+  console.log(formatHadithEntryList(hadithEntries, formatOptions));
 };

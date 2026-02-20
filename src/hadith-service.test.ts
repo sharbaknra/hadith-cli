@@ -1,5 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it, vi, type Mock } from 'vitest';
 import { readFile, writeFile } from 'node:fs/promises';
+import { type Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { HADITH_SEED } from './data/hadith-seed.js';
 import { getRandomHadith, syncHadithCache } from './hadith-service.js';
 
@@ -15,7 +15,6 @@ describe('hadith-service', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     process.env.HADITH_CLI_CONFIG_DIR = '/tmp/hadith-cli-tests';
-    delete process.env.DUA_CLI_CONFIG_DIR;
   });
 
   afterEach(() => {

@@ -1,12 +1,14 @@
-import type { Dua } from '../types.js';
+import type { HadithEntry } from '../types.js';
 
-export const DUAS: ReadonlyArray<Dua> = [
+export const HADITH_ENTRIES: ReadonlyArray<HadithEntry> = [
   {
     id: 'morning-1',
     title: 'Morning Remembrance',
     arabic: 'اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ',
-    transliteration: 'Allahumma bika asbahna, wa bika amsayna, wa bika nahya, wa bika namutu, wa ilaykan-nushur',
-    translation: 'O Allah, by You we enter the morning, and by You we enter the evening, and by You we live, and by You we die, and to You is the resurrection.',
+    transliteration:
+      'Allahumma bika asbahna, wa bika amsayna, wa bika nahya, wa bika namutu, wa ilaykan-nushur',
+    translation:
+      'O Allah, by You we enter the morning, and by You we enter the evening, and by You we live, and by You we die, and to You is the resurrection.',
     category: 'daily',
     context: 'morning',
     reference: 'Tirmidhi',
@@ -16,8 +18,10 @@ export const DUAS: ReadonlyArray<Dua> = [
     id: 'evening-1',
     title: 'Evening Remembrance',
     arabic: 'اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ',
-    transliteration: 'Allahumma bika amsayna, wa bika asbahna, wa bika nahya, wa bika namutu, wa ilaykal-masir',
-    translation: 'O Allah, by You we enter the evening, and by You we enter the morning, and by You we live, and by You we die, and to You is the return.',
+    transliteration:
+      'Allahumma bika amsayna, wa bika asbahna, wa bika nahya, wa bika namutu, wa ilaykal-masir',
+    translation:
+      'O Allah, by You we enter the evening, and by You we enter the morning, and by You we live, and by You we die, and to You is the return.',
     category: 'daily',
     context: 'evening',
     reference: 'Tirmidhi',
@@ -38,7 +42,7 @@ export const DUAS: ReadonlyArray<Dua> = [
     id: 'eating-after',
     title: 'After Eating',
     arabic: 'الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ',
-    transliteration: 'Alhamdulillahil-ladhi at\'amana wa saqana wa ja\'alana muslimeen',
+    transliteration: "Alhamdulillahil-ladhi at'amana wa saqana wa ja'alana muslimeen",
     translation: 'Praise be to Allah Who fed us and gave us drink and made us Muslims.',
     category: 'food',
     context: 'after-eating',
@@ -60,7 +64,7 @@ export const DUAS: ReadonlyArray<Dua> = [
     id: 'waking-up',
     title: 'Upon Waking Up',
     arabic: 'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ',
-    transliteration: 'Alhamdulillahil-ladhi ahyaana ba\'da ma amatana wa ilayhin-nushur',
+    transliteration: "Alhamdulillahil-ladhi ahyaana ba'da ma amatana wa ilayhin-nushur",
     translation: 'Praise be to Allah Who gave us life after death and to Him is the resurrection.',
     category: 'sleep',
     context: 'waking-up',
@@ -71,8 +75,10 @@ export const DUAS: ReadonlyArray<Dua> = [
     id: 'travel-start',
     title: 'Beginning a Journey',
     arabic: 'سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ',
-    transliteration: 'Subhanal-ladhi sakhkhara lana hadha wa ma kunna lahu muqrinin wa inna ila rabbina lamunqalibun',
-    translation: 'Glory to Him Who has subjected this to us, and we could never have it (by our efforts). And verily, to our Lord we indeed are to return.',
+    transliteration:
+      'Subhanal-ladhi sakhkhara lana hadha wa ma kunna lahu muqrinin wa inna ila rabbina lamunqalibun',
+    translation:
+      'Glory to Him Who has subjected this to us, and we could never have it (by our efforts). And verily, to our Lord we indeed are to return.',
     category: 'travel',
     context: 'journey-start',
     reference: 'Muslim',
@@ -81,9 +87,12 @@ export const DUAS: ReadonlyArray<Dua> = [
   {
     id: 'entering-home',
     title: 'Entering Home',
-    arabic: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ الْمَوْلِجِ وَخَيْرَ الْمَخْرَجِ، بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا',
-    transliteration: 'Allahumma inni as\'aluka khayral-mawliji wa khayral-makhraji, bismillahi walajna, wa bismillahi kharajna, wa \'ala Allahi rabbina tawakkalna',
-    translation: 'O Allah, I ask You for the best entry and the best exit. In the name of Allah we enter, and in the name of Allah we leave, and upon our Lord we rely.',
+    arabic:
+      'اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ الْمَوْلِجِ وَخَيْرَ الْمَخْرَجِ، بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا',
+    transliteration:
+      "Allahumma inni as'aluka khayral-mawliji wa khayral-makhraji, bismillahi walajna, wa bismillahi kharajna, wa 'ala Allahi rabbina tawakkalna",
+    translation:
+      'O Allah, I ask You for the best entry and the best exit. In the name of Allah we enter, and in the name of Allah we leave, and upon our Lord we rely.',
     category: 'home',
     context: 'entering',
     reference: 'Abu Dawud',
@@ -93,8 +102,9 @@ export const DUAS: ReadonlyArray<Dua> = [
     id: 'leaving-home',
     title: 'Leaving Home',
     arabic: 'بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',
-    transliteration: 'Bismillahi tawakkaltu \'ala Allahi, la hawla wa la quwwata illa billah',
-    translation: 'In the name of Allah, I place my trust in Allah. There is no power and no strength except with Allah.',
+    transliteration: "Bismillahi tawakkaltu 'ala Allahi, la hawla wa la quwwata illa billah",
+    translation:
+      'In the name of Allah, I place my trust in Allah. There is no power and no strength except with Allah.',
     category: 'home',
     context: 'leaving',
     reference: 'Tirmidhi',
@@ -115,7 +125,7 @@ export const DUAS: ReadonlyArray<Dua> = [
     id: 'leaving-mosque',
     title: 'Leaving Mosque',
     arabic: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ',
-    transliteration: 'Allahumma inni as\'aluka min fadlik',
+    transliteration: "Allahumma inni as'aluka min fadlik",
     translation: 'O Allah, I ask You from Your bounty.',
     category: 'worship',
     context: 'mosque-leaving',
@@ -126,7 +136,7 @@ export const DUAS: ReadonlyArray<Dua> = [
     id: 'entering-bathroom',
     title: 'Entering Bathroom',
     arabic: 'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ',
-    transliteration: 'Allahumma inni a\'udhu bika minal-khubuthi wal-khaba\'ith',
+    transliteration: "Allahumma inni a'udhu bika minal-khubuthi wal-khaba'ith",
     translation: 'O Allah, I seek refuge in You from male and female devils.',
     category: 'hygiene',
     context: 'bathroom-entering',
@@ -160,7 +170,8 @@ export const DUAS: ReadonlyArray<Dua> = [
     title: 'In Times of Distress',
     arabic: 'لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ',
     transliteration: 'La ilaha illa anta subhanaka inni kuntu minaz-zalimin',
-    translation: 'There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers.',
+    translation:
+      'There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers.',
     category: 'supplication',
     context: 'distress',
     reference: 'Quran 21:87',
@@ -170,8 +181,9 @@ export const DUAS: ReadonlyArray<Dua> = [
     id: 'forgiveness',
     title: 'Seeking Forgiveness',
     arabic: 'رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ',
-    transliteration: 'Rabbighfir li wa tub \'alayya innaka antat-tawwabur-rahim',
-    translation: 'My Lord, forgive me and accept my repentance, for You are the Accepter of Repentance, the Merciful.',
+    transliteration: "Rabbighfir li wa tub 'alayya innaka antat-tawwabur-rahim",
+    translation:
+      'My Lord, forgive me and accept my repentance, for You are the Accepter of Repentance, the Merciful.',
     category: 'supplication',
     context: 'forgiveness',
     reference: 'Tirmidhi',
@@ -181,7 +193,7 @@ export const DUAS: ReadonlyArray<Dua> = [
     id: 'guidance',
     title: 'Seeking Guidance',
     arabic: 'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى',
-    transliteration: 'Allahumma inni as\'alukal-huda wat-tuqa wal-\'afafa wal-ghina',
+    transliteration: "Allahumma inni as'alukal-huda wat-tuqa wal-'afafa wal-ghina",
     translation: 'O Allah, I ask You for guidance, piety, chastity, and self-sufficiency.',
     category: 'supplication',
     context: 'guidance',
@@ -191,32 +203,56 @@ export const DUAS: ReadonlyArray<Dua> = [
 ] as const;
 
 export const CATEGORIES = [
-  { id: 'daily', name: 'Daily Remembrances', description: 'Duas for daily activities' },
-  { id: 'food', name: 'Food & Drink', description: 'Duas related to eating and drinking' },
-  { id: 'sleep', name: 'Sleep', description: 'Duas for sleeping and waking' },
-  { id: 'travel', name: 'Travel', description: 'Duas for journeys' },
-  { id: 'home', name: 'Home', description: 'Duas for entering and leaving home' },
-  { id: 'worship', name: 'Worship', description: 'Duas for mosque and worship' },
-  { id: 'hygiene', name: 'Hygiene', description: 'Duas for bathroom and cleanliness' },
-  { id: 'supplication', name: 'General Supplications', description: 'Various duas for different situations' },
+  { id: 'daily', name: 'Daily Remembrances', description: 'Hadith entries for daily activities' },
+  {
+    id: 'food',
+    name: 'Food & Drink',
+    description: 'Hadith entries related to eating and drinking',
+  },
+  { id: 'sleep', name: 'Sleep', description: 'Hadith entries for sleeping and waking' },
+  { id: 'travel', name: 'Travel', description: 'Hadith entries for journeys' },
+  { id: 'home', name: 'Home', description: 'Hadith entries for entering and leaving home' },
+  { id: 'worship', name: 'Worship', description: 'Hadith entries for mosque and worship' },
+  { id: 'hygiene', name: 'Hygiene', description: 'Hadith entries for bathroom and cleanliness' },
+  {
+    id: 'supplication',
+    name: 'General Supplications',
+    description: 'Various hadith entries for different situations',
+  },
 ] as const;
 
 export const CONTEXTS = [
   { id: 'morning', name: 'Morning', description: 'Morning remembrances' },
   { id: 'evening', name: 'Evening', description: 'Evening remembrances' },
-  { id: 'before-eating', name: 'Before Eating', description: 'Dua before meals' },
-  { id: 'after-eating', name: 'After Eating', description: 'Dua after meals' },
-  { id: 'before-sleep', name: 'Before Sleep', description: 'Dua before sleeping' },
-  { id: 'waking-up', name: 'Waking Up', description: 'Dua upon waking' },
-  { id: 'journey-start', name: 'Starting Journey', description: 'Dua when beginning travel' },
-  { id: 'entering', name: 'Entering Home', description: 'Dua when entering home' },
-  { id: 'leaving', name: 'Leaving Home', description: 'Dua when leaving home' },
-  { id: 'mosque-entering', name: 'Entering Mosque', description: 'Dua when entering mosque' },
-  { id: 'mosque-leaving', name: 'Leaving Mosque', description: 'Dua when leaving mosque' },
-  { id: 'bathroom-entering', name: 'Entering Bathroom', description: 'Dua when entering bathroom' },
-  { id: 'bathroom-leaving', name: 'Leaving Bathroom', description: 'Dua when leaving bathroom' },
-  { id: 'sneezing', name: 'After Sneezing', description: 'Dua after sneezing' },
-  { id: 'distress', name: 'Times of Distress', description: 'Dua in difficult times' },
-  { id: 'forgiveness', name: 'Seeking Forgiveness', description: 'Dua for forgiveness' },
-  { id: 'guidance', name: 'Seeking Guidance', description: 'Dua for guidance' },
+  { id: 'before-eating', name: 'Before Eating', description: 'Hadith entry before meals' },
+  { id: 'after-eating', name: 'After Eating', description: 'Hadith entry after meals' },
+  { id: 'before-sleep', name: 'Before Sleep', description: 'Hadith entry before sleeping' },
+  { id: 'waking-up', name: 'Waking Up', description: 'Hadith entry upon waking' },
+  {
+    id: 'journey-start',
+    name: 'Starting Journey',
+    description: 'Hadith entry when beginning travel',
+  },
+  { id: 'entering', name: 'Entering Home', description: 'Hadith entry when entering home' },
+  { id: 'leaving', name: 'Leaving Home', description: 'Hadith entry when leaving home' },
+  {
+    id: 'mosque-entering',
+    name: 'Entering Mosque',
+    description: 'Hadith entry when entering mosque',
+  },
+  { id: 'mosque-leaving', name: 'Leaving Mosque', description: 'Hadith entry when leaving mosque' },
+  {
+    id: 'bathroom-entering',
+    name: 'Entering Bathroom',
+    description: 'Hadith entry when entering bathroom',
+  },
+  {
+    id: 'bathroom-leaving',
+    name: 'Leaving Bathroom',
+    description: 'Hadith entry when leaving bathroom',
+  },
+  { id: 'sneezing', name: 'After Sneezing', description: 'Hadith entry after sneezing' },
+  { id: 'distress', name: 'Times of Distress', description: 'Hadith entry in difficult times' },
+  { id: 'forgiveness', name: 'Seeking Forgiveness', description: 'Hadith entry for forgiveness' },
+  { id: 'guidance', name: 'Seeking Guidance', description: 'Hadith entry for guidance' },
 ] as const;

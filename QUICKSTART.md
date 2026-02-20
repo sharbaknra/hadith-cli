@@ -18,25 +18,25 @@ node dist/cli.js
 
 # Or make it executable globally
 npm link
-dua
+hadith-cli
 ```
 
 ## Common Commands
 
 ```bash
-# Daily dua
+# Daily hadith entry
 node dist/cli.js daily
 
-# Search duas
+# Search hadith entries
 node dist/cli.js search "eating"
 
 # List categories
 node dist/cli.js category --list
 
-# Show specific dua
+# Show specific hadith entry
 node dist/cli.js show morning-1
 
-# Random dua
+# Random hadith entry
 node dist/cli.js random
 
 # Manage favorites
@@ -67,7 +67,7 @@ npm run format
 
 - `src/cli.ts` - Main CLI entry point
 - `src/commands/` - Command handlers
-- `src/data/duas.ts` - Dua database
-- `src/dua-service.ts` - Business logic
+- `src/data/hadith-entries.ts` - Hadith entry database
+- `src/hadith-content-service.ts` - Business logic
 - `src/config.ts` - Configuration management
 - `src/ui/` - UI components (formatters, themes)

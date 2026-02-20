@@ -1,19 +1,18 @@
-import type { Hadith } from '../types.js';
+import type { CollectionHadith } from '../types.js';
 
-export const HADITH_SEED: ReadonlyArray<Hadith> = [
+export const HADITH_SEED: ReadonlyArray<CollectionHadith> = [
   {
     id: 'seed-bukhari-1',
     collection: 'Sahih al-Bukhari',
     hadithNumber: 1,
-    text: "Actions are judged by intentions, and every person will get what they intended.",
+    text: 'Actions are judged by intentions, and every person will get what they intended.',
     reference: 'Sahih al-Bukhari 1',
   },
   {
     id: 'seed-muslim-2699',
     collection: 'Sahih Muslim',
     hadithNumber: 2699,
-    text:
-      'Whoever follows a path in pursuit of knowledge, Allah will make easy for him a path to Paradise.',
+    text: 'Whoever follows a path in pursuit of knowledge, Allah will make easy for him a path to Paradise.',
     reference: 'Sahih Muslim 2699',
   },
   {

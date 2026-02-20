@@ -1,7 +1,7 @@
-import { getDailyDua } from '../dua-service.js';
-import { formatDua } from '../ui/formatter.js';
-import { getBanner } from '../ui/banner.js';
 import { getConfig } from '../config.js';
+import { getDailyHadith } from '../hadith-content-service.js';
+import { getBanner } from '../ui/banner.js';
+import { formatHadithEntry } from '../ui/formatter.js';
 import type { FormatOptions } from '../ui/formatter.js';
 
 export interface DailyCommandOptions {
@@ -10,7 +10,7 @@ export interface DailyCommandOptions {
 }
 
 export const dailyCommand = (options: DailyCommandOptions = {}): void => {
-  const daily = getDailyDua();
+  const daily = getDailyHadith();
   const config = getConfig();
 
   if (options.json) {
@@ -25,12 +25,19 @@ export const dailyCommand = (options: DailyCommandOptions = {}): void => {
   const formatOptions: FormatOptions = {
     json: options.json ?? undefined,
     compact: options.plain ?? undefined,
-    showArabic: config.preferredLanguage === 'all' || config.preferredLanguage === 'arabic' ? true : undefined,
+    showArabic:
+      config.preferredLanguage === 'all' || config.preferredLanguage === 'arabic'
+        ? true
+        : undefined,
     showTransliteration:
-      config.preferredLanguage === 'all' || config.preferredLanguage === 'transliteration' ? true : undefined,
+      config.preferredLanguage === 'all' || config.preferredLanguage === 'transliteration'
+        ? true
+        : undefined,
     showTranslation:
-      config.preferredLanguage === 'all' || config.preferredLanguage === 'translation' ? true : undefined,
+      config.preferredLanguage === 'all' || config.preferredLanguage === 'translation'
+        ? true
+        : undefined,
   };
 
-  console.log(formatDua(daily.dua, formatOptions));
+  console.log(formatHadithEntry(daily.hadith, formatOptions));
 };

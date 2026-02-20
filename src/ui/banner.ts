@@ -1,7 +1,5 @@
-import { duaBlue, duaBold, PRAYER_HANDS_EMOJI } from './theme.js';
+import { BOOK_EMOJI, hadithBlue, hadithBold } from './theme.js';
 
 export const getBanner = (): string => {
-  return duaBlue(
-    `${PRAYER_HANDS_EMOJI} ${duaBold('Dua CLI')} - Islamic Supplications\n`
-  );
+  return hadithBlue(`${BOOK_EMOJI} ${hadithBold('Hadith CLI')} - Islamic Hadith Browser\n`);
 };

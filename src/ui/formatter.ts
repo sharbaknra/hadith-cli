@@ -1,7 +1,13 @@
-import pc from 'picocolors';
-import type { Dua } from '../types.js';
-import { duaBlue, duaBold, duaDim, duaGreen, duaYellow, STAR_EMOJI } from './theme.js';
-import { isFavoriteDua } from '../config.js';
+import { isFavoriteHadith } from '../config.js';
+import type { HadithEntry } from '../types.js';
+import {
+  STAR_EMOJI,
+  hadithBlue,
+  hadithBold,
+  hadithDim,
+  hadithGreen,
+  hadithYellow,
+} from './theme.js';
 
 export interface FormatOptions {
   showArabic?: boolean | undefined;
@@ -25,14 +31,17 @@ const DEFAULT_FORMAT_OPTIONS: FormatOptions = {
   json: false,
 };
 
-export const formatDua = (dua: Dua, options: FormatOptions = {}): string => {
+export const formatHadithEntry = (
+  hadithEntry: HadithEntry,
+  options: FormatOptions = {},
+): string => {
   const opts = { ...DEFAULT_FORMAT_OPTIONS, ...options };
 
   if (opts.json) {
-    return JSON.stringify(dua, null, 2);
+    return JSON.stringify(hadithEntry, null, 2);
   }
 
-  const isFavorite = isFavoriteDua(dua.id);
+  const isFavorite = isFavoriteHadith(hadithEntry.id);
   const favoriteMarker = isFavorite ? ` ${STAR_EMOJI}` : '';
 
   let output = '';
@@ -42,12 +51,12 @@ export const formatDua = (dua: Dua, options: FormatOptions = {}): string => {
   }
 
   // Title
-  output += duaBold(duaBlue(`${dua.title}${favoriteMarker}`));
-  if (opts.showCategory && dua.category) {
-    output += ` ${duaDim(`[${dua.category}]`)}`;
+  output += hadithBold(hadithBlue(`${hadithEntry.title}${favoriteMarker}`));
+  if (opts.showCategory && hadithEntry.category) {
+    output += ` ${hadithDim(`[${hadithEntry.category}]`)}`;
   }
-  if (opts.showContext && dua.context) {
-    output += ` ${duaDim(`(${dua.context})`)}`;
+  if (opts.showContext && hadithEntry.context) {
+    output += ` ${hadithDim(`(${hadithEntry.context})`)}`;
   }
   output += '\n';
 
@@ -56,8 +65,8 @@ export const formatDua = (dua: Dua, options: FormatOptions = {}): string => {
   }
 
   // Arabic
-  if (opts.showArabic && dua.arabic) {
-    output += duaGreen(dua.arabic);
+  if (opts.showArabic && hadithEntry.arabic) {
+    output += hadithGreen(hadithEntry.arabic);
     output += '\n';
     if (!opts.compact) {
       output += '\n';
@@ -65,8 +74,8 @@ export const formatDua = (dua: Dua, options: FormatOptions = {}): string => {
   }
 
   // Transliteration
-  if (opts.showTransliteration && dua.transliteration) {
-    output += duaYellow(dua.transliteration);
+  if (opts.showTransliteration && hadithEntry.transliteration) {
+    output += hadithYellow(hadithEntry.transliteration);
     output += '\n';
     if (!opts.compact) {
       output += '\n';
@@ -74,8 +83,8 @@ export const formatDua = (dua: Dua, options: FormatOptions = {}): string => {
   }
 
   // Translation
-  if (opts.showTranslation && dua.translation) {
-    output += duaDim(dua.translation);
+  if (opts.showTranslation && hadithEntry.translation) {
+    output += hadithDim(hadithEntry.translation);
     output += '\n';
     if (!opts.compact) {
       output += '\n';
@@ -83,8 +92,8 @@ export const formatDua = (dua: Dua, options: FormatOptions = {}): string => {
   }
 
   // Reference
-  if (opts.showReference && dua.reference) {
-    output += duaDim(`Reference: ${dua.reference}`);
+  if (opts.showReference && hadithEntry.reference) {
+    output += hadithDim(`Reference: ${hadithEntry.reference}`);
     output += '\n';
   }
 
@@ -95,23 +104,23 @@ export const formatDua = (dua: Dua, options: FormatOptions = {}): string => {
   return output;
 };
 
-export const formatDuaList = (
-  duas: readonly Dua[],
-  options: FormatOptions = {}
+export const formatHadithEntryList = (
+  hadithEntries: readonly HadithEntry[],
+  options: FormatOptions = {},
 ): string => {
   const opts = { ...DEFAULT_FORMAT_OPTIONS, ...options };
 
   if (opts.json) {
-    return JSON.stringify(duas, null, 2);
+    return JSON.stringify(hadithEntries, null, 2);
   }
 
-  if (duas.length === 0) {
-    return duaDim('No duas found.\n');
+  if (hadithEntries.length === 0) {
+    return hadithDim('No hadith entries found.\n');
   }
 
-  return duas.map((dua) => formatDua(dua, opts)).join('\n');
+  return hadithEntries.map((hadithEntry) => formatHadithEntry(hadithEntry, opts)).join('\n');
 };
 
-export const formatCompactDua = (dua: Dua): string => {
-  return `${dua.title} - ${dua.translation.substring(0, 50)}...`;
+export const formatCompactHadithEntry = (hadithEntry: HadithEntry): string => {
+  return `${hadithEntry.title} - ${hadithEntry.translation.substring(0, 50)}...`;
 };

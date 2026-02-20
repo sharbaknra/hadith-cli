@@ -1,10 +1,10 @@
-import { duaBlue, duaBold, duaDim } from './theme.js';
-import type { Hadith } from '../types.js';
+import type { CollectionHadith } from '../types.js';
+import { hadithBlue, hadithBold, hadithDim } from './theme.js';
 
-export const formatHadith = (hadith: Hadith): string => {
+export const formatHadith = (hadith: CollectionHadith): string => {
   let output = '';
-  output += `${duaBold(duaBlue('Hadith'))}\n`;
-  output += `${duaDim(`${hadith.reference} (${hadith.collection})`)}` + '\n\n';
-  output += hadith.text + '\n';
+  output += `${hadithBold(hadithBlue('Hadith'))}\n`;
+  output += `${hadithDim(`${hadith.reference} (${hadith.collection})`)}\n\n`;
+  output += `${hadith.text}\n`;
   return output;
 };

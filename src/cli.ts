@@ -1,14 +1,14 @@
-import { program } from 'commander';
 import { createRequire } from 'node:module';
-import { dailyCommand } from './commands/daily.js';
-import { searchCommand } from './commands/search.js';
+import { program } from 'commander';
 import { categoryCommand } from './commands/category.js';
-import { showCommand } from './commands/show.js';
+import { configCommand } from './commands/config.js';
+import { dailyCommand } from './commands/daily.js';
 import { favoritesCommand } from './commands/favorites.js';
 import { randomCommand } from './commands/random.js';
-import { configCommand } from './commands/config.js';
-import { startupCommand } from './commands/startup.js';
 import { scrapeHadithCommand } from './commands/scrape-hadith.js';
+import { searchCommand } from './commands/search.js';
+import { showCommand } from './commands/show.js';
+import { startupCommand } from './commands/startup.js';
 
 const require = createRequire(import.meta.url);
 const pkg = require('../package.json') as {
@@ -16,13 +16,13 @@ const pkg = require('../package.json') as {
 };
 
 program
-  .name('dua')
-  .description('CLI tool for Islamic duas (supplications)')
+  .name('hadith-cli')
+  .description('CLI tool for Islamic hadith entries')
   .version(pkg.version, '-v, --version');
 
 program
   .command('daily')
-  .description('Show today\'s dua')
+  .description("Show today's hadith entry")
   .option('-j, --json', 'JSON output')
   .option('-p, --plain', 'Plain text output')
   .action((options) => {
@@ -31,7 +31,7 @@ program
 
 program
   .command('search')
-  .description('Search for duas by keyword')
+  .description('Search for hadith entries by keyword')
   .argument('<query>', 'Search query')
   .option('-j, --json', 'JSON output')
   .option('-p, --plain', 'Plain text output')
@@ -41,8 +41,8 @@ program
 
 program
   .command('show')
-  .description('Show a specific dua by ID')
-  .argument('<id>', 'Dua ID')
+  .description('Show a specific hadith entry by ID')
+  .argument('<id>', 'Hadith entry ID')
   .option('-j, --json', 'JSON output')
   .option('-p, --plain', 'Plain text output')
   .action((id, options) => {
@@ -51,7 +51,7 @@ program
 
 program
   .command('category')
-  .description('List duas by category')
+  .description('List hadith entries by category')
   .option('-c, --category <category>', 'Category ID')
   .option('-l, --list', 'List all categories')
   .option('-j, --json', 'JSON output')
@@ -62,7 +62,7 @@ program
 
 program
   .command('random')
-  .description('Show a random dua')
+  .description('Show a random hadith entry')
   .option('-j, --json', 'JSON output')
   .option('-p, --plain', 'Plain text output')
   .action((options) => {
@@ -85,10 +85,10 @@ program
 
 program
   .command('favorites')
-  .description('Manage favorite duas')
-  .option('-a, --add <id>', 'Add dua to favorites')
-  .option('-r, --remove <id>', 'Remove dua from favorites')
-  .option('-l, --list', 'List favorite duas')
+  .description('Manage favorite hadith entries')
+  .option('-a, --add <id>', 'Add hadith entry to favorites')
+  .option('-r, --remove <id>', 'Remove hadith entry from favorites')
+  .option('-l, --list', 'List favorite hadith entries')
   .option('-j, --json', 'JSON output')
   .option('-p, --plain', 'Plain text output')
   .action((options) => {
@@ -100,17 +100,23 @@ program
   .description('Manage configuration')
   .option('--show', 'Show current configuration')
   .option('--clear', 'Clear configuration')
-  .option('--daily-reminder <boolean>', 'Enable/disable daily reminder', (value) => value === 'true')
+  .option(
+    '--daily-reminder <boolean>',
+    'Enable/disable daily reminder',
+    (value) => value === 'true',
+  )
   .option('--reminder-time <time>', 'Set reminder time (HH:MM format)')
-  .option('--preferred-language <lang>', 'Set preferred language (arabic|transliteration|translation|all)')
+  .option(
+    '--preferred-language <lang>',
+    'Set preferred language (arabic|transliteration|translation|all)',
+  )
   .action((options) => {
     configCommand(options);
   });
 
-// Default command: show daily dua
-program
-  .action(() => {
-    dailyCommand();
-  });
+// Default command: show daily hadith entry
+program.action(() => {
+  dailyCommand();
+});
 
 void program.parseAsync();

@@ -1,7 +1,7 @@
-import { getAllDuas, getDuaById } from '../dua-service.js';
-import { formatDuaList } from '../ui/formatter.js';
+import { addFavoriteHadith, getConfig, removeFavoriteHadith } from '../config.js';
+import { getHadithEntryById } from '../hadith-content-service.js';
 import { getBanner } from '../ui/banner.js';
-import { getConfig, addFavoriteDua, removeFavoriteDua } from '../config.js';
+import { formatHadithEntryList } from '../ui/formatter.js';
 import type { FormatOptions } from '../ui/formatter.js';
 
 export interface FavoritesCommandOptions {
@@ -16,35 +16,35 @@ export const favoritesCommand = (options: FavoritesCommandOptions = {}): void =>
   const config = getConfig();
 
   if (options.add) {
-    const dua = getDuaById(options.add);
-    if (!dua) {
-      console.error(`Error: Dua with ID "${options.add}" not found.`);
+    const hadith = getHadithEntryById(options.add);
+    if (!hadith) {
+      console.error(`Error: Hadith entry with ID "${options.add}" not found.`);
       process.exit(1);
     }
-    addFavoriteDua(options.add);
-    console.log(`Added "${dua.title}" to favorites.`);
+    addFavoriteHadith(options.add);
+    console.log(`Added "${hadith.title}" to favorites.`);
     return;
   }
 
   if (options.remove) {
-    const dua = getDuaById(options.remove);
-    if (!dua) {
-      console.error(`Error: Dua with ID "${options.remove}" not found.`);
+    const hadith = getHadithEntryById(options.remove);
+    if (!hadith) {
+      console.error(`Error: Hadith entry with ID "${options.remove}" not found.`);
       process.exit(1);
     }
-    removeFavoriteDua(options.remove);
-    console.log(`Removed "${dua.title}" from favorites.`);
+    removeFavoriteHadith(options.remove);
+    console.log(`Removed "${hadith.title}" from favorites.`);
     return;
   }
 
   // List favorites
-  const favoriteIds = config.favoriteDuas ?? [];
-  const favoriteDuas = favoriteIds
-    .map((id) => getDuaById(id))
-    .filter((dua): dua is NonNullable<typeof dua> => dua !== undefined);
+  const favoriteIds = config.favoriteHadiths ?? [];
+  const favoriteHadiths = favoriteIds
+    .map((id) => getHadithEntryById(id))
+    .filter((hadith): hadith is NonNullable<typeof hadith> => hadith !== undefined);
 
   if (options.json) {
-    console.log(JSON.stringify(favoriteDuas, null, 2));
+    console.log(JSON.stringify(favoriteHadiths, null, 2));
     return;
   }
 
@@ -52,21 +52,30 @@ export const favoritesCommand = (options: FavoritesCommandOptions = {}): void =>
     console.log(getBanner());
   }
 
-  if (favoriteDuas.length === 0) {
-    console.log('No favorite duas yet. Use "dua favorites --add <id>" to add some.');
+  if (favoriteHadiths.length === 0) {
+    console.log(
+      'No favorite hadith entries yet. Use "hadith-cli favorites --add <id>" to add some.',
+    );
     return;
   }
 
   const formatOptions: FormatOptions = {
     json: options.json ?? undefined,
     compact: options.plain ?? undefined,
-    showArabic: config.preferredLanguage === 'all' || config.preferredLanguage === 'arabic' ? true : undefined,
+    showArabic:
+      config.preferredLanguage === 'all' || config.preferredLanguage === 'arabic'
+        ? true
+        : undefined,
     showTransliteration:
-      config.preferredLanguage === 'all' || config.preferredLanguage === 'transliteration' ? true : undefined,
+      config.preferredLanguage === 'all' || config.preferredLanguage === 'transliteration'
+        ? true
+        : undefined,
     showTranslation:
-      config.preferredLanguage === 'all' || config.preferredLanguage === 'translation' ? true : undefined,
+      config.preferredLanguage === 'all' || config.preferredLanguage === 'translation'
+        ? true
+        : undefined,
   };
 
-  console.log(`Your favorite duas (${favoriteDuas.length}):\n`);
-  console.log(formatDuaList(favoriteDuas, formatOptions));
+  console.log(`Your favorite hadith entries (${favoriteHadiths.length}):\n`);
+  console.log(formatHadithEntryList(favoriteHadiths, formatOptions));
 };

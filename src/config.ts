@@ -1,22 +1,21 @@
 import Conf from 'conf';
 import { z } from 'zod';
-import type { DuaConfig } from './types.js';
+import type { HadithCliConfig } from './types.js';
 
 const ConfigSchema = z.object({
-  favoriteDuas: z.array(z.string()).optional(),
+  favoriteHadiths: z.array(z.string()).optional(),
   dailyReminder: z.boolean().optional(),
   reminderTime: z.string().optional(),
   preferredLanguage: z.enum(['arabic', 'transliteration', 'translation', 'all']).optional(),
 });
 
 const getConfigCwd = (): string | undefined => {
-  const configuredPath = process.env.HADITH_CLI_CONFIG_DIR ?? process.env.DUA_CLI_CONFIG_DIR;
+  const configuredPath = process.env.HADITH_CLI_CONFIG_DIR;
   if (configuredPath) {
     return configuredPath;
   }
 
-  const isTestRuntime =
-    process.env.VITEST === 'true' || process.env.NODE_ENV === 'test';
+  const isTestRuntime = process.env.VITEST === 'true' || process.env.NODE_ENV === 'test';
   if (isTestRuntime) {
     return '/tmp';
   }
@@ -26,21 +25,21 @@ const getConfigCwd = (): string | undefined => {
 
 const configCwd = getConfigCwd();
 
-const config = new Conf<DuaConfig>({
+const config = new Conf<HadithCliConfig>({
   projectName: 'hadith-cli',
   ...(configCwd ? { cwd: configCwd } : {}),
   defaults: {
-    favoriteDuas: [],
+    favoriteHadiths: [],
     dailyReminder: false,
     preferredLanguage: 'all',
   },
 });
 
-const getValidatedConfig = (): DuaConfig => {
+const getValidatedConfig = (): HadithCliConfig => {
   const parsed = ConfigSchema.safeParse(config.store);
   if (!parsed.success) {
     return {
-      favoriteDuas: [],
+      favoriteHadiths: [],
       dailyReminder: false,
       preferredLanguage: 'all',
     };
@@ -48,31 +47,34 @@ const getValidatedConfig = (): DuaConfig => {
   return parsed.data;
 };
 
-export const getConfig = (): DuaConfig => {
+export const getConfig = (): HadithCliConfig => {
   return getValidatedConfig();
 };
 
-export const setFavoriteDuas = (duaIds: string[]): void => {
-  config.set('favoriteDuas', duaIds);
+export const setFavoriteHadiths = (hadithIds: string[]): void => {
+  config.set('favoriteHadiths', hadithIds);
 };
 
-export const addFavoriteDua = (duaId: string): void => {
+export const addFavoriteHadith = (hadithId: string): void => {
   const current = getConfig();
-  const favorites = current.favoriteDuas ?? [];
-  if (!favorites.includes(duaId)) {
-    config.set('favoriteDuas', [...favorites, duaId]);
+  const favorites = current.favoriteHadiths ?? [];
+  if (!favorites.includes(hadithId)) {
+    config.set('favoriteHadiths', [...favorites, hadithId]);
   }
 };
 
-export const removeFavoriteDua = (duaId: string): void => {
+export const removeFavoriteHadith = (hadithId: string): void => {
   const current = getConfig();
-  const favorites = current.favoriteDuas ?? [];
-  config.set('favoriteDuas', favorites.filter((id) => id !== duaId));
+  const favorites = current.favoriteHadiths ?? [];
+  config.set(
+    'favoriteHadiths',
+    favorites.filter((id) => id !== hadithId),
+  );
 };
 
-export const isFavoriteDua = (duaId: string): boolean => {
+export const isFavoriteHadith = (hadithId: string): boolean => {
   const current = getConfig();
-  return (current.favoriteDuas ?? []).includes(duaId);
+  return (current.favoriteHadiths ?? []).includes(hadithId);
 };
 
 export const setDailyReminder = (enabled: boolean): void => {
@@ -84,7 +86,7 @@ export const setReminderTime = (time: string): void => {
 };
 
 export const setPreferredLanguage = (
-  language: 'arabic' | 'transliteration' | 'translation' | 'all'
+  language: 'arabic' | 'transliteration' | 'translation' | 'all',
 ): void => {
   config.set('preferredLanguage', language);
 };

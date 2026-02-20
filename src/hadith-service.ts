@@ -1,8 +1,8 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
 import { homedir } from 'node:os';
+import { dirname, join } from 'node:path';
 import { HADITH_SEED } from './data/hadith-seed.js';
-import type { Hadith } from './types.js';
+import type { CollectionHadith } from './types.js';
 
 const EDITIONS_URL =
   'https://raw.githubusercontent.com/fawazahmed0/hadith-api/refs/heads/1/editions.json';
@@ -37,14 +37,11 @@ interface HadithApiEdition {
 
 interface HadithCachePayload {
   readonly updatedAt: string;
-  readonly hadiths: ReadonlyArray<Hadith>;
+  readonly hadiths: ReadonlyArray<CollectionHadith>;
 }
 
 const resolveCachePath = (): string => {
-  const baseDir =
-    process.env.HADITH_CLI_CONFIG_DIR ??
-    process.env.DUA_CLI_CONFIG_DIR ??
-    join(homedir(), '.config', 'hadith-cli');
+  const baseDir = process.env.HADITH_CLI_CONFIG_DIR ?? join(homedir(), '.config', 'hadith-cli');
   return join(baseDir, CACHE_FILE_NAME);
 };
 
@@ -63,7 +60,7 @@ const normalizeText = (text: string): string => {
     .trim();
 };
 
-const scrapeAllEnglishHadiths = async (): Promise<ReadonlyArray<Hadith>> => {
+const scrapeAllEnglishHadiths = async (): Promise<ReadonlyArray<CollectionHadith>> => {
   const editions = await fetchJson<EditionsIndex>(EDITIONS_URL);
 
   const englishEditions = Object.values(editions)
@@ -74,7 +71,7 @@ const scrapeAllEnglishHadiths = async (): Promise<ReadonlyArray<Hadith>> => {
     englishEditions.map(async (entry) => {
       const url = entry.linkmin ?? entry.link;
       if (!url) {
-        return [] as Hadith[];
+        return [] as CollectionHadith[];
       }
 
       const payload = await fetchJson<HadithApiEdition>(url);
@@ -93,10 +90,10 @@ const scrapeAllEnglishHadiths = async (): Promise<ReadonlyArray<Hadith>> => {
             hadithNumber,
             text,
             reference: `${collectionName} ${hadithNumber}`,
-          } satisfies Hadith;
+          } satisfies CollectionHadith;
         })
         .filter((item) => item.text.length > 0);
-    })
+    }),
   );
 
   return perEdition.flat();
@@ -111,7 +108,7 @@ const readHadithCache = async (): Promise<HadithCachePayload | undefined> => {
   }
 };
 
-const writeHadithCache = async (hadiths: ReadonlyArray<Hadith>): Promise<void> => {
+const writeHadithCache = async (hadiths: ReadonlyArray<CollectionHadith>): Promise<void> => {
   const cachePath = resolveCachePath();
   await mkdir(dirname(cachePath), { recursive: true });
   await writeFile(
@@ -122,9 +119,9 @@ const writeHadithCache = async (hadiths: ReadonlyArray<Hadith>): Promise<void> =
         hadiths,
       } satisfies HadithCachePayload,
       null,
-      2
+      2,
     ),
-    'utf8'
+    'utf8',
   );
 };
 
@@ -136,7 +133,7 @@ const isFresh = (updatedAt: string): boolean => {
   return Date.now() - lastUpdated < CACHE_MAX_AGE_MS;
 };
 
-const pickRandom = (hadiths: ReadonlyArray<Hadith>): Hadith => {
+const pickRandom = (hadiths: ReadonlyArray<CollectionHadith>): CollectionHadith => {
   const index = Math.floor(Math.random() * hadiths.length);
   const hadith = hadiths[index];
   if (!hadith) {
@@ -151,7 +148,7 @@ export const syncHadithCache = async (): Promise<number> => {
   return hadiths.length;
 };
 
-export const getRandomHadith = async (): Promise<Hadith> => {
+export const getRandomHadith = async (): Promise<CollectionHadith> => {
   const cached = await readHadithCache();
   if (cached && cached.hadiths.length > 0 && isFresh(cached.updatedAt)) {
     return pickRandom(cached.hadiths);
