@@ -25,8 +25,8 @@ program
   .description("Show today's hadith entry")
   .option('-j, --json', 'JSON output')
   .option('-p, --plain', 'Plain text output')
-  .action((options) => {
-    dailyCommand(options);
+  .action(async (options) => {
+    await dailyCommand(options);
   });
 
 program
@@ -65,8 +65,8 @@ program
   .description('Show a random hadith entry')
   .option('-j, --json', 'JSON output')
   .option('-p, --plain', 'Plain text output')
-  .action((options) => {
-    randomCommand(options);
+  .action(async (options) => {
+    await randomCommand(options);
   });
 
 program
@@ -122,8 +122,8 @@ program
   });
 
 // Default command: show daily hadith entry
-program.action(() => {
-  dailyCommand();
+program.action(async () => {
+  await dailyCommand();
 });
 
 void program.parseAsync();

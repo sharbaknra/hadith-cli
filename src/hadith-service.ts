@@ -142,16 +142,10 @@ const pickRandom = (hadiths: ReadonlyArray<CollectionHadith>): CollectionHadith 
   return hadith;
 };
 
-export const syncHadithCache = async (): Promise<number> => {
-  const hadiths = await scrapeAllEnglishHadiths();
-  await writeHadithCache(hadiths);
-  return hadiths.length;
-};
-
-export const getRandomHadith = async (): Promise<CollectionHadith> => {
+const resolveHadithPool = async (): Promise<ReadonlyArray<CollectionHadith>> => {
   const cached = await readHadithCache();
   if (cached && cached.hadiths.length > 0 && isFresh(cached.updatedAt)) {
-    return pickRandom(cached.hadiths);
+    return cached.hadiths;
   }
 
   try {
@@ -159,16 +153,42 @@ export const getRandomHadith = async (): Promise<CollectionHadith> => {
     if (count > 0) {
       const refreshed = await readHadithCache();
       if (refreshed && refreshed.hadiths.length > 0) {
-        return pickRandom(refreshed.hadiths);
+        return refreshed.hadiths;
       }
     }
   } catch {
-    // Fall back to seed hadiths so startup still shows something offline.
+    // Fall through to stale cache / seed fallback.
   }
 
   if (cached && cached.hadiths.length > 0) {
-    return pickRandom(cached.hadiths);
+    return cached.hadiths;
   }
 
-  return pickRandom(HADITH_SEED);
+  return HADITH_SEED;
+};
+
+export const syncHadithCache = async (): Promise<number> => {
+  const hadiths = await scrapeAllEnglishHadiths();
+  await writeHadithCache(hadiths);
+  return hadiths.length;
+};
+
+export const getRandomHadith = async (): Promise<CollectionHadith> => {
+  const hadiths = await resolveHadithPool();
+  return pickRandom(hadiths);
+};
+
+export const getDailyCollectionHadith = async (
+  date: Date = new Date(),
+): Promise<CollectionHadith> => {
+  const hadiths = await resolveHadithPool();
+  const dayOfYear = Math.floor(
+    (date.getTime() - new Date(date.getFullYear(), 0, 0).getTime()) / 1000 / 60 / 60 / 24,
+  );
+  const hadithIndex = dayOfYear % hadiths.length;
+  const hadith = hadiths[hadithIndex];
+  if (!hadith) {
+    throw new Error('No hadith available');
+  }
+  return hadith;
 };
