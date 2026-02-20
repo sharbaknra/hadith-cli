@@ -1,123 +1,143 @@
 # hadith-cli
 
-A terminal CLI for browsing Islamic hadith entries with optional startup hadith support.
-
-It includes:
-- daily and random hadith entries
-- keyword search and category browsing
-- favorites and local config management
-- startup hadith output with a locally cached hadith dataset
+Command-line tool that shows a hadith in your terminal and supports local hadith cache sync.
 
 ## Requirements
 
 - Node.js `>=18`
-- npm or pnpm
+- npm
 
 ## Installation
 
 ```bash
-# install dependencies
-npm install
+# one-off run
+npx hadith-cli startup
 
-# build
-npm run build
+# global install
+npm install -g hadith-cli
 ```
 
-To run as a global command:
+Installed binaries:
+- `hadith-cli`
+- `hadith`
+
+## Usage
 
 ```bash
-npm link
-hadith-cli --help
-```
-
-You can also run directly without linking:
-
-```bash
-node dist/cli.js --help
-```
-
-## Quick Usage
-
-```bash
-# default action (same as "daily")
+# default command (same as "daily")
 hadith-cli
 
-# today's hadith entry
+# show today's entry
 hadith-cli daily
 
-# random hadith entry
+# random entry
 hadith-cli random
 
-# search
+# search text
 hadith-cli search "patience"
-
-# show one hadith entry by id
-hadith-cli show morning-1
 
 # list categories
 hadith-cli category --list
 
-# list hadith entries in a category
-hadith-cli category --category morning
+# show entries for a category
+hadith-cli category --category daily
+
+# show specific entry by id
+hadith-cli show morning-1
 
 # favorites
 hadith-cli favorites --add morning-1
 hadith-cli favorites --list
 hadith-cli favorites --remove morning-1
 
-# config
-hadith-cli config --show
-hadith-cli config --preferred-language translation
+# show startup hadith now
+hadith-cli startup
+
+# scrape full english hadith cache
+hadith-cli scrape-hadith
 ```
 
-## Commands
-
-- `daily` - show today's hadith entry
-- `search <query>` - search by keyword
-- `show <id>` - show a specific hadith entry
-- `category --list` - list all categories
-- `category --category <category>` - list hadith entries in a category
-- `random` - show a random hadith entry
-- `favorites --add <id>` - add a favorite
-- `favorites --remove <id>` - remove a favorite
-- `favorites --list` - list favorites
-- `config --show` - show current config
-- `config --clear` - clear saved config
-- `config --daily-reminder <boolean>` - enable/disable reminder
-- `config --reminder-time <HH:MM>` - set reminder time
-- `config --preferred-language <arabic|transliteration|translation|all>` - output language
-- `startup` - print a random hadith for shell startup usage
-- `scrape-hadith` - refresh local hadith cache from remote source
-
-Most content commands also support:
+Most content commands support:
 - `-j, --json` for JSON output
-- `-p, --plain` for compact plain output
+- `-p, --plain` for compact output
 
-## Hadith Cache
+## Auto-show Hadith On Terminal Open
 
-The `startup` command reads hadiths from a local cache.  
-If cache is missing/stale, it attempts to sync automatically.  
-If sync fails (for example offline), it falls back to built-in seed hadiths.
+The npm package does not edit your shell profile automatically.
+Configure it once in your shell startup file.
 
-## Environment Variables
+### Bash (Linux/macOS)
 
-- `HADITH_CLI_CONFIG_DIR` - custom directory for config + hadith cache
+Add to `~/.bashrc`:
+
+```bash
+hadith-cli startup 2>/dev/null || true
+```
+
+Reload:
+
+```bash
+source ~/.bashrc
+```
+
+### Zsh (Linux/macOS)
+
+Add to `~/.zshrc`:
+
+```bash
+hadith-cli startup 2>/dev/null || true
+```
+
+Reload:
+
+```bash
+source ~/.zshrc
+```
+
+### PowerShell (Windows)
+
+Open profile:
+
+```powershell
+notepad $PROFILE
+```
+
+Add:
+
+```powershell
+hadith-cli startup 2>$null
+```
+
+Restart PowerShell.
+
+## Cache and Config
+
+- `startup` reads from local hadith cache.
+- If cache is missing/stale, it tries to sync from remote source.
+- If sync fails (offline/network issue), it falls back to seed hadiths.
+
+Environment variable:
+- `HADITH_CLI_CONFIG_DIR` - custom directory for config and hadith cache.
 
 ## Development
 
 ```bash
-# watch build
-npm run dev
-
-# tests
-npm run test
-
-# lint
+npm install
 npm run lint
-
-# type-check
 npm run typecheck
+npm test
+npm run build
+npm run check
 ```
+
+## Publishing
+
+```bash
+npm login
+npm publish
+```
+
+`prepublishOnly` runs `npm run check`, so publish fails if quality checks fail.
 
 ## License
 

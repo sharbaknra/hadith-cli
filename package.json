@@ -4,6 +4,7 @@
   "description": "CLI tool for Islamic hadith entries with daily reminders and context-based recommendations",
   "type": "module",
   "bin": {
+    "hadith": "./dist/cli.js",
     "hadith-cli": "./dist/cli.js"
   },
   "main": "./dist/index.js",
@@ -18,9 +19,10 @@
     "lint": "biome check .",
     "format": "biome check --write .",
     "typecheck": "tsc --noEmit",
-    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
+    "check": "npm run lint && npm run typecheck && npm test && npm run build",
+    "prepublishOnly": "npm run check"
   },
-  "keywords": ["hadith", "islamic", "supplication", "prayer", "reminder", "cli", "muslim"],
+  "keywords": ["hadith", "islamic", "sunnah", "reminder", "cli", "muslim"],
   "author": "",
   "license": "MIT",
   "repository": {

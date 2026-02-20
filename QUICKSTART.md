@@ -33,14 +33,14 @@ node dist/cli.js search "eating"
 # List categories
 node dist/cli.js category --list
 
-# Show specific hadith entry
-node dist/cli.js show morning-1
+# Show a startup hadith
+node dist/cli.js startup
 
-# Random hadith entry
-node dist/cli.js random
+# Scrape and cache complete english hadith dataset
+node dist/cli.js scrape-hadith
 
 # Manage favorites
-node dist/cli.js favorites --add morning-1
+node dist/cli.js favorites --add guidance
 node dist/cli.js favorites
 
 # Configuration
@@ -67,7 +67,7 @@ npm run format
 
 - `src/cli.ts` - Main CLI entry point
 - `src/commands/` - Command handlers
-- `src/data/hadith-entries.ts` - Hadith entry database
-- `src/hadith-content-service.ts` - Business logic
+- `src/data/duas.ts` - Built-in data used by existing commands
+- `src/hadith-service.ts` - Hadith scraping/cache service
 - `src/config.ts` - Configuration management
 - `src/ui/` - UI components (formatters, themes)
