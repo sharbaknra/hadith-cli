@@ -18,7 +18,7 @@ node dist/cli.js
 
 # Or make it executable globally
 npm link
-hadith-cli
+hadees-cli
 ```
 
 ## Common Commands

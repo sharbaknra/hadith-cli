@@ -41,7 +41,7 @@ interface HadithCachePayload {
 }
 
 const resolveCachePath = (): string => {
-  const baseDir = process.env.HADITH_CLI_CONFIG_DIR ?? join(homedir(), '.config', 'hadith-cli');
+  const baseDir = process.env.HADEES_CLI_CONFIG_DIR ?? join(homedir(), '.config', 'hadees-cli');
   return join(baseDir, CACHE_FILE_NAME);
 };
 

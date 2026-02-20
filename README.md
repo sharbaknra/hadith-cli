@@ -1,4 +1,4 @@
-# hadith-cli
+# hadees-cli
 
 Command-line tool that shows a hadith in your terminal and supports local hadith cache sync.
 
@@ -11,53 +11,53 @@ Command-line tool that shows a hadith in your terminal and supports local hadith
 
 ```bash
 # one-off run
-npx @sharbaknra/hadith-cli startup
+npx hadees-cli startup
 
 # global install
-npm install -g @sharbaknra/hadith-cli
+npm install -g hadees-cli
 ```
 
 Installed binaries:
-- `hadith-cli`
-- `hadith`
+- `hadees-cli`
+- `hadees`
 
 ## Usage
 
 ```bash
 # default command (same as "daily")
-hadith-cli
+hadees-cli
 
 # show today's entry
-hadith-cli daily
+hadees-cli daily
 
 # random entry
-hadith-cli random
+hadees-cli random
 
 # search text
-hadith-cli search "patience"
+hadees-cli search "patience"
 
 # list categories
-hadith-cli category --list
+hadees-cli category --list
 
 # show entries for a category
-hadith-cli category --category daily
+hadees-cli category --category daily
 
 # show specific entry by id
-hadith-cli show morning-1
+hadees-cli show morning-1
 
 # favorites
-hadith-cli favorites --add morning-1
-hadith-cli favorites --list
-hadith-cli favorites --remove morning-1
+hadees-cli favorites --add morning-1
+hadees-cli favorites --list
+hadees-cli favorites --remove morning-1
 
 # show startup hadith now
-hadith-cli startup
+hadees-cli startup
 
 # show one random hadith on demand (without startup hooks)
-hadith-cli hadith-now
+hadees-cli hadith-now
 
 # scrape full english hadith cache
-hadith-cli scrape-hadith
+hadees-cli scrape-hadith
 ```
 
 Most content commands support:
@@ -74,7 +74,7 @@ Configure it once in your shell startup file.
 Add to `~/.bashrc`:
 
 ```bash
-hadith-cli startup 2>/dev/null || true
+hadees-cli startup 2>/dev/null || true
 ```
 
 Reload:
@@ -88,7 +88,7 @@ source ~/.bashrc
 Add to `~/.zshrc`:
 
 ```bash
-hadith-cli startup 2>/dev/null || true
+hadees-cli startup 2>/dev/null || true
 ```
 
 Reload:
@@ -108,7 +108,7 @@ notepad $PROFILE
 Add:
 
 ```powershell
-hadith-cli startup 2>$null
+hadees-cli startup 2>$null
 ```
 
 Restart PowerShell.
@@ -120,7 +120,7 @@ Restart PowerShell.
 - If sync fails (offline/network issue), it falls back to seed hadiths.
 
 Environment variable:
-- `HADITH_CLI_CONFIG_DIR` - custom directory for config and hadith cache.
+- `HADEES_CLI_CONFIG_DIR` - custom directory for config and hadith cache.
 
 ## Development
 

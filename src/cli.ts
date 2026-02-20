@@ -16,7 +16,7 @@ const pkg = require('../package.json') as {
 };
 
 program
-  .name('hadith-cli')
+  .name('hadees-cli')
   .description('CLI tool for Islamic hadith entries')
   .version(pkg.version, '-v, --version');
 

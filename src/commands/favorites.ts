@@ -54,7 +54,7 @@ export const favoritesCommand = (options: FavoritesCommandOptions = {}): void =>
 
   if (favoriteHadiths.length === 0) {
     console.log(
-      'No favorite hadith entries yet. Use "hadith-cli favorites --add <id>" to add some.',
+      'No favorite hadith entries yet. Use "hadees-cli favorites --add <id>" to add some.',
     );
     return;
   }

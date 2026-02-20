@@ -14,7 +14,7 @@ vi.mock('node:fs/promises', () => {
 describe('hadith-service', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    process.env.HADITH_CLI_CONFIG_DIR = '/tmp/hadith-cli-tests';
+    process.env.HADEES_CLI_CONFIG_DIR = '/tmp/hadees-cli-tests';
   });
 
   afterEach(() => {

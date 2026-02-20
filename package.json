@@ -1,11 +1,11 @@
 {
-  "name": "@sharbaknra/hadith-cli",
+  "name": "hadees-cli",
   "version": "0.1.0",
   "description": "CLI tool for Islamic hadith entries with daily reminders and context-based recommendations",
   "type": "module",
   "bin": {
-    "hadith": "./dist/cli.js",
-    "hadith-cli": "./dist/cli.js"
+    "hadees": "./dist/cli.js",
+    "hadees-cli": "./dist/cli.js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

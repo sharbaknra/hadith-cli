@@ -10,7 +10,7 @@ const ConfigSchema = z.object({
 });
 
 const getConfigCwd = (): string | undefined => {
-  const configuredPath = process.env.HADITH_CLI_CONFIG_DIR;
+  const configuredPath = process.env.HADEES_CLI_CONFIG_DIR;
   if (configuredPath) {
     return configuredPath;
   }
@@ -26,7 +26,7 @@ const getConfigCwd = (): string | undefined => {
 const configCwd = getConfigCwd();
 
 const config = new Conf<HadithCliConfig>({
-  projectName: 'hadith-cli',
+  projectName: 'hadees-cli',
   ...(configCwd ? { cwd: configCwd } : {}),
   defaults: {
     favoriteHadiths: [],
