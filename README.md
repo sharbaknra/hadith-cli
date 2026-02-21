@@ -122,26 +122,6 @@ Restart PowerShell.
 Environment variable:
 - `HADEES_CLI_CONFIG_DIR` - custom directory for config and hadith cache.
 
-## Development
-
-```bash
-npm install
-npm run lint
-npm run typecheck
-npm test
-npm run build
-npm run check
-```
-
-## Publishing
-
-```bash
-npm login
-npm publish --access public
-```
-
-`prepublishOnly` runs `npm run check`, so publish fails if quality checks fail.
-
 ## License
 
 MIT
